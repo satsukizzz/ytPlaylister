@@ -7,7 +7,7 @@ client.once('ready', () => {
 });
 
 client.on('message', message => {
-  if (message.isMemberMentioned(client.user)) {
+  if (message.mentions.has(client.user)) {
     message.reply( 'My prefix is "!".');
     return;
   }
