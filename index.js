@@ -11,7 +11,7 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
 }
 
-const prefix = "yt!p";
+const prefix = "y!p";
 
 client.once('ready', () => {
 	console.log('bot is ready!');
@@ -19,7 +19,7 @@ client.once('ready', () => {
 
 client.on('message', message => {
   if (message.mentions.has(client.user)) {
-    message.reply( `My prefix is "${prefix}".`);
+    message.reply( `My prefix is "${prefix}" and please add a space after the prefix.`);
     return;
   }
   if (message.content.startsWith("!p" || "-p")) {
@@ -27,8 +27,7 @@ client.on('message', message => {
     return;
   }
   if(!message.content.startsWith(prefix) || message.author.bot) return;
-  const args = message.content.slice(prefix.length).split(/ +/);
-  console.log(args);
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
   const command = args.shift().toLowerCase();
 
   if(!client.commands.has(command)) return;
@@ -40,4 +39,4 @@ client.on('message', message => {
   }
 });
 
-client.login(process.env.DISCORD_BOT_TOKEN);
+client.login(process.env.DISCORD_BOT_TOKEN || JSON.parse(fs.readFileSync('secret.json')).DISCORD_BOT_TOKEN);
