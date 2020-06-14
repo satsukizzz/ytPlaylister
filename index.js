@@ -14,7 +14,7 @@ for (const file of commandFiles) {
 const prefix = "y!p";
 
 client.once('ready', () => {
-	console.log('bot is ready!');
+  console.log('bot is ready!');
 });
 
 client.on('message', message => {
